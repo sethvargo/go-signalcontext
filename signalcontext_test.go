@@ -33,6 +33,28 @@ func TestWrap(t *testing.T) {
 	}
 }
 
+func TestWrapAll(t *testing.T) {
+	ctx, cancel := signalcontext.WrapAll(context.Background())
+	defer cancel()
+
+	select {
+	case <-ctx.Done():
+		t.Fatal("context should not be done")
+	case <-time.After(10 * time.Millisecond):
+	}
+
+	if err := syscall.Kill(syscall.Getpid(), syscall.SIGINFO); err != nil {
+		t.Fatal("failed to signal")
+	}
+
+	select {
+	case <-ctx.Done():
+		// expected
+	case <-time.After(10 * time.Millisecond):
+		t.Fatal("context should have been done")
+	}
+}
+
 func ExampleOnInterrupt() {
 	ctx, cancel := signalcontext.OnInterrupt()
 	defer cancel()
