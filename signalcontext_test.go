@@ -43,7 +43,7 @@ func TestWrapAll(t *testing.T) {
 	case <-time.After(10 * time.Millisecond):
 	}
 
-	if err := syscall.Kill(syscall.Getpid(), syscall.SIGINFO); err != nil {
+	if err := syscall.Kill(syscall.Getpid(), syscall.SIGUSR2); err != nil {
 		t.Fatal("failed to signal")
 	}
 
