@@ -13,18 +13,18 @@ import (
 )
 
 // OnInterrupt creates a new context that cancels on SIGINT or SIGTERM.
-func OnInterrupt() (context.Context, func()) {
+func OnInterrupt() (context.Context, context.CancelFunc) {
 	return Wrap(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 }
 
 // On creates a new context that cancels on the given signals.
-func On(signals ...os.Signal) (context.Context, func()) {
+func On(signals ...os.Signal) (context.Context, context.CancelFunc) {
 	return Wrap(context.Background(), signals...)
 }
 
 // Wrap creates a new context that cancels on the given signals. It wraps the
 // provided context.
-func Wrap(ctx context.Context, signals ...os.Signal) (context.Context, func()) {
+func Wrap(ctx context.Context, signals ...os.Signal) (context.Context, context.CancelFunc) {
 	ctx, closer := context.WithCancel(ctx)
 
 	c := make(chan os.Signal, 1)
