@@ -3,6 +3,7 @@
 //     ctx, cancel := signalcontext.OnInterrupt()
 //     defer cancel()
 //
+// Deprecated: Use signal.NotifyContext instead.
 package signalcontext
 
 import (
