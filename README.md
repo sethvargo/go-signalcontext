@@ -1,9 +1,8 @@
 # Signal Context
 
-[![GoDoc](https://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)](https://pkg.go.dev/mod/github.com/sethvargo/go-signalcontext)
-[![GitHub Actions](https://img.shields.io/github/workflow/status/sethvargo/go-signalcontext/Test?style=flat-square)](https://github.com/sethvargo/go-signalcontext/actions?query=workflow%3ATest)
+⚠️ 🛑 **Do not use this library on Go 1.16+!** Go 1.16 introduced a native standard library for `signal.NotifyContext`, which you should use instead.
 
-**Do not use this library on Go 1.16+!** Go 1.16 introduced a native standard library for `signal.NotifyContext` which you should use instead. Only use this library for Go 1.15 or older.
+---
 
 Signal Context (`signalcontext`) is a Go library for creating Go context's that cancel on signals. This is very useful for client-side applications that want to cancel operations on user interrupts (e.g. CTRL+C).
 
