@@ -14,17 +14,23 @@ import (
 )
 
 // OnInterrupt creates a new context that cancels on SIGINT or SIGTERM.
+//
+// Deprecated: Use signal.NotifyContext instead.
 func OnInterrupt() (context.Context, context.CancelFunc) {
 	return Wrap(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 }
 
 // On creates a new context that cancels on the given signals.
+//
+// Deprecated: Use signal.NotifyContext instead.
 func On(signals ...os.Signal) (context.Context, context.CancelFunc) {
 	return Wrap(context.Background(), signals...)
 }
 
 // Wrap creates a new context that cancels on the given signals. It wraps the
 // provided context.
+//
+// Deprecated: Use signal.NotifyContext instead.
 func Wrap(ctx context.Context, signals ...os.Signal) (context.Context, context.CancelFunc) {
 	ctx, closer := context.WithCancel(ctx)
 
